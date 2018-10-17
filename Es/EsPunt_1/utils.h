@@ -8,4 +8,8 @@ int length_string(const char s[]);
 void reverse_string(char s[]);
 //parte IV
 const char* copy_string(const char s[]);
+//parte V
+char* concat_string(const char s[], const char s2[]);
+//parte VI
+char* token_string(const char s[], const char st[]);
 #endif
