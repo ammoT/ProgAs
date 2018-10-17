@@ -13,15 +13,12 @@ int main(int argc, char *argv[]) {
     std::cout << "Copia : ";
     print_string(ris);
     delete [] ris;
+    ris = NULL;
     ris = concat_string(argv[1],argv[2]);
     std::cout << "Concatenazione : ";
     print_string(ris);
-    delete[] ris;
-    ris = token_string(argv[1],argv[2]);
-    std::cout << "TOKEN : ";
-    print_string(ris);
+    delete [] ris;
   }
-  delete[] ris;
   ris = 0;
   return 0;
 }

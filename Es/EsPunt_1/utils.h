@@ -11,5 +11,5 @@ const char* copy_string(const char s[]);
 //parte V
 char* concat_string(const char s[], const char s2[]);
 //parte VI
-char* token_string(const char s[], const char st[]);
+const char* token_string(const char t[], const char pat[]);
 #endif
