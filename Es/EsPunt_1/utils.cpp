@@ -53,5 +53,23 @@ char* concat_string(const char s1[], const char s2[]) {
 }
 //Parte VI
 const char* token_string(const char t[], const char pat[]) {
-  return NULL;
+  int lt = length_string(t);
+  int lpat = length_string(pat);
+
+  const char *pstart = t;
+  const char *pend = t + lt - lpat + 1;
+
+  const char *p = 0;
+
+  for(p = pstart; p < pend ; ++p) {
+    const char *ppat = pat;
+    const char *pp = p;
+    while ( *ppat == *pp && *ppat != '\0') {
+      ++pp;
+      ++ppat;
+    }
+    if ( *ppat == '\0')
+      return p;
+    }
+  return 0;
 }

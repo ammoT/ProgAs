@@ -18,6 +18,9 @@ int main(int argc, char *argv[]) {
     std::cout << "Concatenazione : ";
     print_string(ris);
     delete [] ris;
+    ris = token_string(argv[1],argv[2]);
+    std::cout << "Token : ";
+    print_string(ris);
   }
   ris = 0;
   return 0;
