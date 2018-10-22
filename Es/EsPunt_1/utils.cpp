@@ -2,10 +2,12 @@
 #include "utils.h"
 //Parte I
 void print_string(const char s[]){
-  for(; *s != '\0'; s++) {
-    std::cout << *s;
+  if (s != 0) {
+    for(; *s != '\0'; s++) {
+      std::cout << *s;
+    }
+    std::cout << std::endl;
   }
-  std::cout << std::endl;
 }
 /*
 int length_string(const char s[]) {
@@ -31,6 +33,7 @@ void reverse_string(char s[]) {
 //Parte IV
 const char* copy_string(const char s[]) {
   int sz = length_string(s) + 1;
+  //std::cout << "sz : " << sz <<std::endl;
   char *p = new char[sz];
   for (int i = 0; i < sz ;i++) {
     p[i] = s[i];
@@ -56,13 +59,13 @@ const char* token_string(const char t[], const char pat[]) {
   int lt = length_string(t);
   int lpat = length_string(pat);
 
-  const char *pstart = t;
-  const char *pend = t + lt - lpat + 1;
+  const char *pstart = t; //puntaore inizio testo
+  const char *pend = t + lt - lpat + 1; //puntatore fine primo possibile pattern
 
   const char *p = 0;
 
   for(p = pstart; p < pend ; ++p) {
-    const char *ppat = pat;
+    const char *ppat = pat; //per non modificare i puntatori
     const char *pp = p;
     while ( *ppat == *pp && *ppat != '\0') {
       ++pp;
