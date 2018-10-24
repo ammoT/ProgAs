@@ -23,8 +23,11 @@ int main(int argc, char *argv[]) {
     print_string(ris);
     delete [] ris;
     ris = token_string(argv[1],argv[2]);
-    std::cout << "Token : ";
+    std::cout << "Occorrenza Token nella stringa : ";
     print_string(ris);
+    ris = sub_string(argv[1],argv[2]);
+    print_string(ris);
+    delete[] ris;
   }
   ris = 0;
   return 0;

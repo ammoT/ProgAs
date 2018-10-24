@@ -7,9 +7,11 @@ int length_string(const char s[]);
 //parte III
 void reverse_string(char s[]);
 //parte IV
-const char* copy_string(const char s[]);
+char* copy_string(const char s[]);
 //parte V
 char* concat_string(const char s[], const char s2[]);
 //parte VI
 const char* token_string(const char t[], const char pat[]);
+//parte VII
+const char* sub_string(const char t[],const char  pat[]);
 #endif

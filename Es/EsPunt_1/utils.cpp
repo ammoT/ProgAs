@@ -31,7 +31,9 @@ void reverse_string(char s[]) {
     std::swap(s[i],s[sz - i]);
 }
 //Parte IV
-const char* copy_string(const char s[]) {
+char* copy_string(const char s[]) {
+  if (s == 0)
+    return 0;
   int sz = length_string(s) + 1;
   //std::cout << "sz : " << sz <<std::endl;
   char *p = new char[sz];
@@ -59,12 +61,12 @@ const char* token_string(const char t[], const char pat[]) {
   int lt = length_string(t);
   int lpat = length_string(pat);
 
-  const char *pstart = t; //puntaore inizio testo
+  const char *tstart = t; //puntaore inizio testo
   const char *pend = t + lt - lpat + 1; //puntatore fine primo possibile pattern
 
   const char *p = 0;
 
-  for(p = pstart; p < pend ; ++p) {
+  for(p = tstart; p < pend ; ++p) {
     const char *ppat = pat; //per non modificare i puntatori
     const char *pp = p;
     while ( *ppat == *pp && *ppat != '\0') {
@@ -75,4 +77,19 @@ const char* token_string(const char t[], const char pat[]) {
       return p;
     }
   return 0;
+}
+//\Parte VII
+const char* sub_string(const char t[],const char  pat[]){
+  const char *tmp = t;
+  const char *tmp_start = tmp;
+  char *t_start = copy_string(t);
+  int sz_pat = length_string(pat);
+  tmp = token_string(t,pat);
+  while (tmp != 0) {
+    for (int i = 0; i < sz_pat; i++){
+      t_start[tmp - tmp_start + i] = '*';
+    }
+    tmp = token_string(tmp + sz_pat ,pat);
+  }
+  return t_start;
 }
