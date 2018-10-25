@@ -20,5 +20,6 @@ public:
   int getValue(size_type index);
   void setValue(size_type index, int value);
   int& value(size_type index);
+  void print();
 };
 #endif

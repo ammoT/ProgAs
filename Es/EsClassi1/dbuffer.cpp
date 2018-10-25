@@ -1,4 +1,5 @@
 #include "dbuffer.h"
+#include <iostream>
 #include <cassert> //libreria assert
 
 dbuffer::dbuffer() {
@@ -17,7 +18,7 @@ dbuffer::dbuffer(size_type sz, int value) {
   }
 }
 
-dbuffer::init(size_type sz) {
+void dbuffer::init(size_type sz) {
   _size = 0;
   _buffer = 0;
 
@@ -39,4 +40,10 @@ void dbuffer::setValue(size_type index, int value) {
 int& dbuffer::value(size_type index) {
   assert(index < _size); //pre-condizioni
   return _buffer[index];
+}
+
+void dbuffer::print() {
+  std::cout << "Size :" << _size << std::endl;
+  for (size_type i = 0; i < _size; i++)
+    std::cout <<"Elemento dbuffer[" << i << "] :" << _buffer[i] << std::endl;
 }
