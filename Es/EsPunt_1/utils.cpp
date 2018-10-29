@@ -93,3 +93,21 @@ const char* sub_string(const char t[],const char  pat[]){
   }
   return t_start;
 }
+
+const char* sub_string2(const char t[], const char pat[], const char newPat[]) {
+  const char *tmp = t;
+  const char *tmp_start = tmp;
+  char *t_start = copy_string(t);
+  int sz_pat = length_string(pat);
+  int sz_npat = length_string(newPat);
+  if (sz_pat != sz_npat)
+    return 0;
+  tmp = token_string(t,pat);
+  while (tmp != 0){
+    for (int i = 0; i < sz_pat; i++) {
+      t_start[tmp - tmp_start + i] = newPat[i];
+    }
+    tmp = token_string(tmp + sz_pat, pat);
+  }
+  return t_start;
+}
