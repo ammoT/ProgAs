@@ -13,6 +13,9 @@ private:
 public:
   //Metodi Fondamentali
   dbuffer(); //costruttore di default
+  ~dbuffer();
+  dbuffer(const dbuffer &other); //copy constructor
+  dbuffer& operator=(const dbuffer &other);
 
   //costruttore secondario
   dbuffer(size_type sz);
