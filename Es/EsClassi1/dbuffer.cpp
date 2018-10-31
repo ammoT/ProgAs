@@ -3,7 +3,7 @@
 #include <cassert> //libreria assert
 #include <algorithm>
 
-dbuffer::dbuffer() {
+dbuffer::dbuffer() : _size(0), _buffer(0){
   #ifndef NDEBUG
   std::cout << "dbuffer()" << std::endl;
   #endif
