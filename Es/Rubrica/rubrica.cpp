@@ -5,7 +5,7 @@ rubrica::rubrica() : _voci(0), _capacity(0), _count(0) {}
 rubrica::rubrica(const rubrica &other) :
   _voci(0), _capacity(0), _count(0) {
     _voci = new voce[other._capacity];
-    for (unsigned int = 0; i < other._count; i++)
+    for (unsigned int i = 0; i < other._count; i++)
       _voci[i] = other._voci[i];
     _capacity = other._capacity;
     _count = other._count;
@@ -13,7 +13,7 @@ rubrica::rubrica(const rubrica &other) :
 
   rubrica& rubrica::operator=(const rubrica &other) {
     if (this != &other) {
-      tmp = new rubrica(other);
+      rubrica tmp(other);
       tmp.swap(*this);
     }
     return *this;
@@ -39,7 +39,7 @@ rubrica::rubrica(unsigned int cap) : _voci(0), _capacity(0), _count(0) {
 
 void rubrica::set_capacity(unsigned int cap) {
   rubrica tmp(cap);
-  if (capacity <= cap) {
+  if (_capacity <= cap) {
     for (unsigned int i = 0; i < _count ; i++)
       tmp._voci[i] = this->_voci[i];
     tmp.swap(*this);

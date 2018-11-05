@@ -4,7 +4,7 @@
 class rubrica {
 private:
   voce *_voci; ///< puntatore all'array di voci
-  unsigned int capacity; ///< dimensione dell'array massima
+  unsigned int _capacity; ///< dimensione dell'array massima
   unsigned int _count; ///< numero di voci registrate
 
 public:
