@@ -1,5 +1,6 @@
 #include "rubrica.h"
 #include <algorithm>
+#include <cassert>
 rubrica::rubrica() : _voci(0), _capacity(0), _count(0) {}
 
 rubrica::rubrica(const rubrica &other) :
@@ -45,4 +46,58 @@ void rubrica::set_capacity(unsigned int cap) {
     tmp.swap(*this);
   }
     tmp.swap(*this);
+}
+
+unsigned int rubrica::get_capacity() const {
+  return _capacity;
+}
+
+unsigned int rubrica::get_count() const {
+  return _count;
+}
+
+const voce &rubrica::operator[](unsigned int index) const {
+  assert(index < _count);
+  return _voci[index];
+}
+void rubrica::set_voce(unsigned int index, const voce &value) {
+    assert(index < _count);
+    //controlli di validità
+    for (unsigned int i = 0; i < _count; i++)
+      if (value.ntel == _voci[i].ntel && (value.nome != _voci[i].nome ||
+        value.cognome != _voci[i].cognome)) {
+            throw set_voce_exception();
+          }
+    _voci[index] = value;
+}
+
+void rubrica::add(const voce &v) {
+  if (_count == _capacity)
+    throw rubrica_full();
+    for (unsigned int i = 0; i < _count; i++)
+      if (v.ntel == _voci[i].ntel &&
+          v.nome == _voci[i].nome &&
+          v.cognome == _voci[i].cognome) {
+            throw voce_duplicated();
+          }
+    _voci[_count] = v;
+    _count++;
+  }
+
+void rubrica::add(const std::string &n,
+         const std::string &c,
+         const std::string &nt) {
+           voce v(n, c, nt);
+           add(v);
+         }
+const voce &rubrica::find(const std::string &nt) const {
+  for (unsigned int i = 0;i < _count; i++)
+    if (_voci[i].ntel == nt)
+      return _voci[i];
+  throw voce_not_found_exception();
+}
+void rubrica::clear(void) {
+  _count = 0; // sovrascrivo le nuove voci
+  //rubrica tmp(_capacity);
+  //tmp.swap(*this);
 }
