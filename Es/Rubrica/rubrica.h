@@ -34,6 +34,10 @@ public:
            const std::string &nt);
   const voce &find(const std::string &nt) const;
   void clear(void);
+  void save(const std::string &nomefile);
+  void load(const std::string &nomefile);
 };
+
+std::ostream& operator<<(std::ostream& os, const rubrica& r);
 
 #endif

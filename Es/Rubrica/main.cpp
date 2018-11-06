@@ -1,5 +1,6 @@
 #include <iostream>
 #include "voce.h"
+#include "rubrica.h"
 #include <cassert>
 void test_voce(void) {
   voce v;
@@ -37,7 +38,48 @@ void test_voce(void) {
   assert(v.cognome == "Paperino");
   assert(v.ntel == "313");
 }
+
+void test_rubrica() {
+  rubrica rub;
+  unsigned int cap;
+
+  std::cout << ">Inserire la capacità :";
+  std::cin >> cap;
+  rub.set_capacity(cap);
+  std::string nome, cognome, ntel;
+  if (cap == 0)
+    return;
+  do {
+    std::cout << ">Cognome : ";
+    std::cin >> cognome;
+    if (cognome != "*") {
+      std::cout << ">Nome : ";
+      std::cin >> nome;
+      std::cout << ">Ntelefonico : ";
+      std::cin >> ntel;
+      try {
+        rub.add(nome,cognome,ntel);
+      }
+      catch(voce_duplicated &e){
+        std::cout << "ERRORE :Voce Duplicata" << std::endl;
+      }
+      catch(rubrica_full &e) {
+        std::cout << "ERRORE :Rubrica Piena" << std::endl;
+        cognome = "*";
+      }
+    }
+  }
+  while (cognome != "*");
+
+  std::cout << rub << std::endl;
+  rub.save("prova.txt");
+  std::cout << "test load :" << std::endl;
+  rub.load("prova.txt"),
+  std::cout << rub << std::endl;
+
+}
 int main(int argc, char const *argv[]) {
   test_voce();
+  test_rubrica();
   return 0;
 }
