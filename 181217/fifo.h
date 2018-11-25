@@ -2,6 +2,7 @@
 #define FIFO_H
 
 #include <ostream>
+#include <cassert>
 
 template <typename T>
 class fifo{
@@ -57,7 +58,7 @@ public:
   //operatore =
   fifo& operator=(const fifo &other) {
     if (this != &other) {
-      fifo tmp(other);
+      fifo<T> tmp(other);
       (*this).swap(tmp);
     }
     return *this;
@@ -65,8 +66,12 @@ public:
 
   //funzione init
   void init(unsigned int n) {
+    #ifndef NDEBUG
+    std::cout << "init(n)" << std::endl;
+    #endif
     _size = n;
-    _queue = new T[_size];
+    if (_size > 0)
+      _queue = new T[_size];
     _occ = 0;
   }
 
@@ -75,12 +80,29 @@ public:
   }
 
   void add(T value) {
+    #ifndef NDEBUG
+    std::cout << "add(v)" << std::endl;
+    #endif
     _queue[_occ] = value;
     _occ++;
   }
 
+  void remove(void) {
+    #ifndef NDEBUG
+    std::cout << "remove" << std::endl;
+    #endif
+    assert(_occ > 0);
+    fifo<T> tmp(_size);
+    for (unsigned int i = 0; i < _occ - 1; i++) {
+      tmp._queue[i] = _queue[i + 1];
+      tmp._occ++;
+    }
+    _occ--;
+    (*this).swap(tmp);
+  }
+
   //Funzione per lo swap
-  void swap(fifo &other) {
+  void swap(fifo<T> &other) {
     std::swap(_queue, other._queue);
     std::swap(_size, other._size);
     std::swap(_occ, other._occ);
