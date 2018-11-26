@@ -9,10 +9,12 @@ class fifo{
 private:
   unsigned int _occ; //n. di valori dentro la coda
   unsigned int _size; //dimensione della coda
+  unsigned int _elder; //indice elemento + vecchio
+  unsigned int _young; // indice elemento inserito per ultimo
   T* _queue;
 public:
   //Costruttore di default
-  fifo() : _size(0) , _occ(0) {
+  fifo() : _size(0) , _occ(0) , _elder(0), _young(0){
     #ifndef NDEBUG
     std::cout << "fifo()" << std::endl;
     #endif
@@ -73,6 +75,8 @@ public:
     if (_size > 0)
       _queue = new T[_size];
     _occ = 0;
+    _young = 0;
+    _elder = 0;
   }
 
   unsigned int filled(void) const {
@@ -84,6 +88,7 @@ public:
     std::cout << "add(v)" << std::endl;
     #endif
     _queue[_occ] = value;
+    _young = _occ;
     _occ++;
   }
 
