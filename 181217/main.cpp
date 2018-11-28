@@ -13,7 +13,7 @@ int main(int argc, char const *argv[]) {
   fi.accoda(4);
   fi.accoda(5);
   std::cout << "Numero di Elementi : " << fi.conta_ele() << std::endl;
-  fi2 = fi;
+  //fi2 = fi;
   std::cout << fi2 << std::endl;
   fi.rimuovi();
   fi.rimuovi();

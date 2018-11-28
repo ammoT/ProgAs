@@ -1,50 +1,61 @@
-#ifndef FORMA_H
-#define FORMA_H
-
-#include <cmath>
-#include <string>
+#ifndef forma_H
+#define forma_H
 #include <ostream>
+#include <string>
+#include <cmath>
 
-enum Color {clBlack, clRed, clWhite};
+enum Color {clBlack, clWhite, clRed};
+
 class Forma {
-private:
-  std::string _id;
-  bool _isFilled;
-  Color _color;
-
+	std::string _id;
+	bool 		_isfilled;
+	Color 		_color;
 public:
-  //Forma();
-  ~Forma();
-  Forma(const Forma &other);
-  Forma &operator=(const Forma &other);
 
-  Forma(const std::string &s, bool filled, Color c);
-  void swap(Forma &other);
+	//Forma();
 
-  std::string id() const;
-  bool filled() const;
-  Color color() const;
+	~Forma(void);
 
-  void set_color(Color c);
-  void set_filled(bool b);
+	Forma(const Forma &other);
 
-  //double perimetro() const;
+	Forma &operator=(const Forma &other);
+
+	Forma(
+		const std::string &s,
+		bool filled,
+		Color c);
+
+	void swap(Forma &other);
+
+	std::string id(void) const;
+
+	bool filled(void) const;
+
+	Color color(void) const;
+
+	void set_color(Color c);
+
+	void set_filled(bool b);
+
+	virtual double perimetro(void) const = 0;
 };
-std::ostream &operator<<(std::ostream &os,const Forma &f);
+
+std::ostream &operator<<(std::ostream& os, const Forma &f);
 
 struct punto {
-  double x;
-  double y;
+	double x;
+	double y;
 
-  punto();
-  punto(double xx, double yy);
+	punto(void);
+
+	punto(double xx, double yy);
 };
-std::ostream &operator<<(std::ostream &os, const punto &p) {
-  os << "X : " << p.x << std::endl;
-  os << "Y : " << p.y ;
-  return os;
+
+std::ostream &operator<<(std::ostream &os, const punto &p);
+
+inline double operator-(const punto &p1, const punto &p2) {
+	return std::sqrt((p1.x-p2.x)*(p1.x-p2.x) +
+									 (p1.y-p2.y)*(p1.y-p2.y));
 }
-inline double operator-(const punto  &p1,const punto &p2) {
-  return std::sqrt(p1.x-p2.x)*(p1.x-p2.x) + (p1.y-p2.y)*(p1.y-p2.y);
-}
+
 #endif
