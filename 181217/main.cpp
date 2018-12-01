@@ -12,14 +12,22 @@ int main(int argc, char const *argv[]) {
     fi.accoda(3);
     fi.accoda(4);
     fi.accoda(4);
-    fi.rimuovi();
+
+    fifo<int> copia;
+    //fifo<int> a = fi;
+    copia = fi;
+
+    copia.rimuovi();
 
     fs.accoda("a");
     fs.accoda("B");
     fs.accoda("C");
     fs.accoda("CIAO");
 
-    std::cout << fi << std::endl;
+    std::cout << fi << std::endl << std::endl;
+    std::cout << "COPIA DI fi : " <<std::endl;
+    std::cout << copia << std::endl << std::endl;
+    //std::cout << "COPIA DI fi : "<< copia << std::endl << std::endl;
     std::cout << fs << std::endl;
   return 0;
 }

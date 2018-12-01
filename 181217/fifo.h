@@ -2,6 +2,7 @@
 #define FIFO_FIFO_H
 
 #include <iostream>
+#include <cassert>
 
 template <typename T>
 class fifo {
@@ -25,6 +26,30 @@ public:
         _fine = 0;
     }
 
+    fifo(const fifo &other){
+      nodo *tmp = other._inizio;
+      while(_inizio != 0) {
+        rimuovi();
+      }
+
+      while (tmp != 0){
+        accoda(tmp -> value);
+        tmp = tmp -> next;
+      }
+    }
+
+    fifo &operator=(const fifo &other) {
+      nodo *tmp = other._inizio;
+      while(_inizio != 0) {
+        rimuovi();
+      }
+      while (tmp != 0){
+        accoda(tmp -> value);
+        tmp = tmp -> next;
+      }
+      return *this;
+    }
+
     void accoda(const T &value) {
         nodo *tmp = new nodo(value);
         if (_inizio != 0)
@@ -46,24 +71,26 @@ public:
     unsigned int size(void) const {
         nodo *tmp = _inizio;
         unsigned int cont = 0;
-        while (tmp != 0) {
+        if (_inizio != 0){
+          while (tmp != 0) {
             tmp = tmp -> next;
             cont++;
         }
+      }
         return cont;
     }
 };
 
 template <typename T>
-std::ostream &operator<<(std::ostream &os, fifo<T> &f) {
-    unsigned int sz = f.size();
-    T val;
-    os << "Size : " << f.size() << std::endl;
-    os << " [ ";
-    for (int i = 0; i < sz; i++) {
-        val = f.rimuovi();
-        std::cout << val << " ";
-        f.accoda(val);
+std::ostream &operator<<(std::ostream &os,const fifo<T> &f) {
+
+    fifo<T> tmp;
+    tmp = f;
+    unsigned int sz = tmp.size();
+    std::cout << "SIZE : " << sz << std::endl;
+    std::cout << " [ ";
+    for (unsigned int i = 0; i < sz; ++i) {
+      std::cout << " [ "<<tmp.rimuovi() << " ] ";
     }
     os << "]";
     return os;
