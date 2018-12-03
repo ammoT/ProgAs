@@ -16,6 +16,17 @@ int main(int argc, char const *argv[]) {
   fi.accoda(4);
   fi.accoda(4);
 
+  fifo<int> fc;
+
+  for (int i = 0 ; i < 1000; i++) {
+    fc.accoda(i);
+  }
+  std::cout << fc.trova(666) << std::endl;
+  std::cout << fc << std::endl;
+
+  if(fi.trova(2))
+    std::cout << "Trovato" <<std::endl ;
+
   fifo<int> copia;
   fifo<int> a = fi;
   copia = fi;
@@ -46,7 +57,7 @@ int main(int argc, char const *argv[]) {
 
   fifo<double> fd(v.begin(),v.end());
 
-  std::cout << fd ;
+  std::cout << fd << std::endl;
 
   return 0;
 }

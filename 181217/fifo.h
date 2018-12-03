@@ -17,9 +17,10 @@ private:
 
 public:
   fifo() : _inizio(0), _fine(0) {}
+  
   ~fifo() {
     while(_inizio != 0)
-      rimuovi();
+    rimuovi();
     _inizio = 0;
     _fine = 0;
   }
@@ -36,7 +37,7 @@ public:
   template <typename IT>
   fifo(IT inizio, IT fine) : _inizio(0), _fine(0) {
     for (;inizio != fine; inizio++)
-    accoda(*inizio);
+      accoda(*inizio);
   }
 
   fifo &operator=(const fifo &other) {
@@ -57,7 +58,7 @@ public:
       _fine -> next = tmp;
     else
       _inizio = tmp;
-      _fine = tmp;
+    _fine = tmp;
   }
 
   T rimuovi(void) {
@@ -79,6 +80,16 @@ public:
       }
     }
     return cont;
+  }
+
+  bool trova(const T &val) const {
+    nodo *tmp = _inizio;
+    while (tmp != 0) {
+      if (tmp -> value == val)
+        return true;
+      tmp = tmp -> next;
+    }
+    return false;
   }
 };
 
