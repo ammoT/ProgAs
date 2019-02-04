@@ -5,6 +5,7 @@ int main(void) {
   mySet<int> si;
   si.add(1);
   si.add(2);
+  si.add(2);
   std::cout << si << std::endl;
   return 0;
 }

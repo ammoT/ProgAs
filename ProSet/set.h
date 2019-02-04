@@ -49,13 +49,22 @@ public:
   }
 
   void add(T val) {
-    _data[_occ] = val;
-    //std::cout << _data[_occ] << std::endl;
-    _occ++;
+    if(chkSet(val)) {
+      _data[_occ] = val;
+      //std::cout << _data[_occ] << std::endl;
+      _occ++;
+    }
+    else {
+      std::cout << "Valore gia presente" << std::endl;
+    }
   }
 
   unsigned int size(void) const {
     return _size;
+  }
+
+  unsigned int filled(void) const {
+    return _occ;
   }
 
   const T &operator[](unsigned int index) const {
@@ -63,13 +72,26 @@ public:
 		return _data[index];
 	}
 
+  bool chkSet(const T val) {
+    bool chk = true;
+    for (unsigned int i = 0; i < _occ; i++) {
+      if (val == _data[i])
+        chk = false;
+      }
+    return chk;
+  }
 };
 
 template <typename T>
 std::ostream &operator<<(std::ostream &os, const mySet<T> &st) {
   os << "size: " << st.size() << std::endl;
-	for (unsigned int i = 0; i < st.size(); ++i)
-		os << st[i] << " ";
+  os << "[ ";
+  for (unsigned int i = 0; i < st.filled(); ++i) {
+    if (i!=0)
+      os << ", ";
+    os << st[i] ;
+  }
+  os << " ] ";
 
 	return os;
 }
